@@ -1,0 +1,6 @@
+applicationType: cli
+defaultPackage: dev.fzymgc
+testFramework: kotest
+sourceLanguage: kotlin
+buildTool: gradle_kotlin
+features: [app-name, asciidoctor, github-workflow-ci, github-workflow-docker-registry, graalvm, gradle, http-client-test, kapt, kotest, kotlin, kotlin-extension-functions, logback, micronaut-build, picocli, picocli-kotest, picocli-kotlin-application, reactor, readme, serialization-jackson, shade, toml, toml-build]
