@@ -10,11 +10,11 @@ image-metadata = { module = "com.drewnoakes:metadata-extractor", version = "2.19
 
 [plugins]
 asciidoctor = { id = "org.asciidoctor.jvm.convert", version = "3.3.2" }
-jreleaser = { id = "org.jreleaser", version = "1.16.0" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 kotlin-allopen = { id = "org.jetbrains.kotlin.plugin.allopen", version.ref = "kotlin" }
 micronaut-application = { id = "io.micronaut.application", version.ref = "micronaut-gradle" }
+nebula-release = { id = "com.netflix.nebula.release", version = "19.0.10" }
 osdetector = { id = "com.google.osdetector", version = "1.7.3" }
 rewrite = { id = "org.openrewrite.rewrite", version = "7.0.3" }
 shadow = { id = "com.github.johnrengelman.shadow", version = "8.1.1" }
