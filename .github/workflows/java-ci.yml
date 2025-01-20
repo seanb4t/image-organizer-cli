@@ -34,9 +34,10 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           set-java-home: 'false'
           native-image-job-reports: 'true'
-          components: 'native-image'
       - name: Build Native Binary
         env:
           TESTCONTAINERS_RYUK_DISABLED: true
         run: |
-          ./gradlew devSnapshot --info --stacktrace --no-daemon
+          env|sort
+          which native-miage
+          ./gradlew devSnapshot --stacktrace --no-daemon
