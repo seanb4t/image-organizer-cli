@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.micronaut.application)
     alias(libs.plugins.shadow)
     alias(libs.plugins.asciidoctor)
+    alias(libs.plugins.jreleaser)
 }
 
 version = "0.1"
@@ -78,4 +79,23 @@ tasks.named<io.micronaut.gradle.docker.NativeImageDockerfile>("dockerfileNative"
     jdkVersion = "23"
 }
 
+jreleaser {
+    project {
+        authors.set(listOf("Sean Brandt"))
+        license = "Apache 2.0"
+    }
+    release {
+        github {
+            repoOwner = "seanb4t"
+            overwrite = true
+        }
 
+    }
+    distributions {
+        create("app") {
+            artifact {
+                setPath("build/distributions/{{distributionName}}-{{projectVersion}}.zip")
+            }
+        }
+    }
+}

@@ -9,6 +9,7 @@ kotlin-jdk8 = {module="org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref="ko
 
 [plugins]
 asciidoctor = { id = "org.asciidoctor.jvm.convert", version = "3.3.2"}
+jreleaser = { id = "org.jreleaser", version = "1.16.0"}
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref="kotlin"}
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref="kotlin"}
 kotlin-allopen = { id = "org.jetbrains.kotlin.plugin.allopen", version.ref="kotlin"}
