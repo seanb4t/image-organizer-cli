@@ -89,7 +89,7 @@ graalvmNative {
             imageName.set("${project.name}-${project.version}-${osdetector.classifier}")
             javaLauncher.set(javaToolchains.launcherFor {
                 languageVersion.set(JavaLanguageVersion.of(23))
-                vendor.set(JvmVendorSpec.matching("GraalVM Community"))
+//                vendor.set(JvmVendorSpec.matching("GraalVM Community"))
             })
         }
     }
