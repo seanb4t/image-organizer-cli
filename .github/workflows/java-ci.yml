@@ -9,9 +9,6 @@ on:
       - main
 jobs:
   build:
-    strategy:
-      matrix:
-        arch:
     name: devSnapshot
     runs-on: ubuntu-latest
     steps:
