@@ -9,7 +9,7 @@ kotlin-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref 
 image-metadata = { module = "com.drewnoakes:metadata-extractor", version = "2.19.0" }
 
 [plugins]
-asciidoctor = { id = "org.asciidoctor.jvm.convert", version = "3.3.2" }
+asciidoctor = { id = "org.asciidoctor.jvm.convert", version = "4.0.4" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 kotlin-allopen = { id = "org.jetbrains.kotlin.plugin.allopen", version.ref = "kotlin" }
