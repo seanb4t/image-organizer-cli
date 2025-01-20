@@ -32,12 +32,27 @@ jobs:
         with:
           platforms: linux/amd64,linux/arm64
           use: true
+      - name: Docker image meta
+        id: image-meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/seanb4t/image-organizer-cli
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=sha
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
           context: "build/docker/native-main"
           file: build/docker/native-main/DockerfileNative
           push: true
-          tags: ghcr.io/seanb4t/image-organizer-cli:latest
           platforms: linux/amd64,linux/arm64
           sbom: true
+          outputs: type=registry,push=true
+          cache-to: type=gha,mode=max
+          cache-from: type=gha
+          tags: ${{ steps.image-meta.outputs.tags }}
+          labels: ${{ steps.image-meta.outputs.labels }}
