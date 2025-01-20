@@ -43,6 +43,6 @@ jobs:
           which native-image
           ls -latr $GRAALVM_HOME/bin
           $GRAALVM_HOME/bin/java -version
-          $GRAALVM_HOME/bin/native-image/java -version
+          ls -Llatr $GRAALVM_HOME/bin/native-image/
           set +v
           ./gradlew devSnapshot --stacktrace --no-daemon
