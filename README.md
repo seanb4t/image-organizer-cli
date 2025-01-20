@@ -8,7 +8,7 @@
 
 ## Push To Docker Registry Workflow
 
-Workflow file: [`.github/workflows/gradle.yml`](.github/workflows/gradle.yml)
+Workflow file: [`.github/workflows/gradle.yml`](.github/workflows/java-ci.yml)
 
 ### Workflow description
 For pushes to the `master` branch, the workflow will:

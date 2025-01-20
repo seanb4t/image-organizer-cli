@@ -27,6 +27,14 @@ jobs:
           java-version: 23.0.1
           distribution: zulu
           cache: gradle
+      - uses: graalvm/setup-graalvm@v1
+        with:
+          java-version: '23'      # See 'Options' for more details
+          distribution: 'graalvm-community' # See 'Supported distributions' for available options
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          set-java-home: 'false'
+          native-image-job-reports: 'true'
+          components: 'native-image'
       - name: Build Native Binary
         env:
           TESTCONTAINERS_RYUK_DISABLED: true
