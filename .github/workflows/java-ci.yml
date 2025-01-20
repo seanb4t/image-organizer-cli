@@ -39,5 +39,8 @@ jobs:
           TESTCONTAINERS_RYUK_DISABLED: true
         run: |
           env|sort
-          which native-miage
+          set -v
+          which native-image
+          ls -latr $GRAALVM_HOME/bin
+          set +v
           ./gradlew devSnapshot --stacktrace --no-daemon
