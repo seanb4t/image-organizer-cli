@@ -36,6 +36,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: "build/docker/native-main"
+          file: build/docker/native-main/DockerfileNative
           push: true
           tags: ghcr.io/seanb4t/image-organizer-cli:latest
           platforms: linux/amd64,linux/arm64
