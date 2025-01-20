@@ -9,43 +9,21 @@ on:
       - main
 jobs:
   build:
+    name: devSnapshot
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-#      - uses: actions/cache@v4
-#        with:
-#          path: |
-#            ~/.gradle/caches
-#            ~/.gradle/wrapper
-#            ~/.m2/repository
-#          key: ${{ runner.os }}-gradle-test-${{ hashFiles('**/*.gradle') }}
-#          restore-keys: |
-#            ${{ runner.os }}-gradle-test-
-#      - name: Set up JDK 21
-#        uses: actions/setup-java@v4
-#        with:
-#          java-version: 23.0.1
-#          distribution: zulu
-#          cache: gradle
+        with:
+          lfs: 'true'
       - uses: graalvm/setup-graalvm@v1
         with:
           java-version: '23'      # See 'Options' for more details
           distribution: 'graalvm-community' # See 'Supported distributions' for available options
           github-token: ${{ secrets.GITHUB_TOKEN }}
-#          set-java-home: 'false'
           native-image-job-reports: 'true'
           cache: gradle
       - name: Build Native Binary
         env:
           TESTCONTAINERS_RYUK_DISABLED: true
         run: |
-          env|sort
-          set -v
-          which native-image
-          ls -latr $GRAALVM_HOME/bin
-          $GRAALVM_HOME/bin/java -version
-          ls -Llatr $GRAALVM_HOME/bin/native-image
-          file $GRAALVM_HOME/bin/native-image
-          $GRAALVM_HOME/bin/native-image --version
-          set +v
           ./gradlew devSnapshot --stacktrace --no-daemon
