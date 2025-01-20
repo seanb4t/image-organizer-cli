@@ -31,4 +31,4 @@ jobs:
         env:
           TESTCONTAINERS_RYUK_DISABLED: true
         run: |
-          ./gradlew nativeBuild --no-daemon
+          ./gradlew devSnapshot --no-daemon
