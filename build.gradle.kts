@@ -83,6 +83,7 @@ micronaut {
 }
 
 graalvmNative {
+    toolchainDetection.set(true)
     binaries {
         named("main") {
             imageName.set("${project.name}-${project.version}-${osdetector.classifier}")
