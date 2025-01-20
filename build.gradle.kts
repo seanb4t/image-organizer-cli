@@ -100,6 +100,10 @@ tasks.named<io.micronaut.gradle.docker.NativeImageDockerfile>("dockerfileNative"
     jdkVersion = "23"
 }
 
+tasks.named("build").configure {
+    dependsOn("dockerfileNative", "dockerPrepareContext")
+}
+
 tasks.named("release").configure {
     dependsOn("nativeCompile", "asciidoctor","build")
 }
