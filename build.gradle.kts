@@ -6,9 +6,10 @@ plugins {
     alias(libs.plugins.micronaut.application)
     alias(libs.plugins.shadow)
     alias(libs.plugins.asciidoctor)
+    alias(libs.plugins.nebula.release)
+    alias(libs.plugins.osdetector)
 }
 
-version = "0.1"
 group = "dev.fzymgc"
 
 apply(from = "gradle/asciidoc.gradle")
@@ -17,6 +18,9 @@ val kotlinVersion = libs.versions.kotlin.get()
 
 repositories {
     mavenCentral()
+}
+
+nebulaRelease {
 }
 
 dependencies {
@@ -32,6 +36,8 @@ dependencies {
     implementation("io.micronaut.toml:micronaut-toml")
     implementation(libs.kotlin.reflect)
     implementation(libs.kotlin.jdk8)
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
+    implementation(libs.image.metadata)
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
     rewrite(platform("org.openrewrite.recipe:rewrite-recipe-bom:latest.release"))
@@ -48,13 +54,16 @@ application {
     mainClass = "dev.fzymgc.ImageOrganizerCommand"
 }
 java {
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
+    sourceCompatibility = JavaVersion.VERSION_23
+    targetCompatibility = JavaVersion.VERSION_23
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(23)
+    }
 }
 
 kotlin {
     jvmToolchain {
-        languageVersion.set(JavaLanguageVersion.of(JavaVersion.VERSION_21.majorVersion))
+        languageVersion.set(JavaLanguageVersion.of(JavaVersion.VERSION_23.majorVersion))
     }
 }
 
@@ -76,9 +85,24 @@ micronaut {
     }
 }
 
+graalvmNative {
+    toolchainDetection.set(false)
+    binaries {
+        named("main") {
+            imageName.set("${project.name}-${project.version}-${osdetector.classifier}")
+        }
+    }
+}
 
 tasks.named<io.micronaut.gradle.docker.NativeImageDockerfile>("dockerfileNative") {
     jdkVersion = "23"
 }
 
+tasks.named("build").configure {
+    dependsOn("buildNativeLayersTask", "dockerfileNative", "dockerPrepareContext")
+}
+
+tasks.named("release").configure {
+    dependsOn("nativeCompile", "asciidoctor","build")
+}
 

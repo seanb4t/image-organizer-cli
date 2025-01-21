@@ -1,0 +1,58 @@
+name: Java CI
+on:
+  push:
+    branches:
+      - "*"
+      - "!main"
+  pull_request:
+    branches:
+      - main
+jobs:
+  build:
+    name: devSnapshot
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: 'true'
+      - uses: graalvm/setup-graalvm@v1
+        with:
+          java-version: '23'      # See 'Options' for more details
+          distribution: 'graalvm-community' # See 'Supported distributions' for available options
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          native-image-job-reports: 'true'
+          cache: gradle
+      - name: Build Native Binary
+        env:
+          TESTCONTAINERS_RYUK_DISABLED: true
+        run: |
+          ./gradlew devSnapshot --stacktrace --no-daemon
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        with:
+          platforms: linux/amd64,linux/arm64
+          use: true
+      - name: Docker image meta
+        id: image-meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/seanb4t/image-organizer-cli
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=sha
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: "build/docker/native-main"
+          file: build/docker/native-main/DockerfileNative
+          push: true
+          platforms: linux/amd64,linux/arm64
+          outputs: type=registry,push=true
+          cache-to: type=gha,mode=max
+          cache-from: type=gha
+          no-cache-filters:
+          tags: ${{ steps.image-meta.outputs.tags }}
+          labels: ${{ steps.image-meta.outputs.labels }}
