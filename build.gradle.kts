@@ -101,7 +101,7 @@ tasks.named<io.micronaut.gradle.docker.NativeImageDockerfile>("dockerfileNative"
 }
 
 tasks.named("build").configure {
-    dependsOn("dockerfileNative", "dockerPrepareContext")
+    dependsOn("buildNativeLayersTask", "dockerfileNative", "dockerPrepareContext")
 }
 
 tasks.named("release").configure {

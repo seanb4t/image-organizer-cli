@@ -54,5 +54,6 @@ jobs:
           outputs: type=registry,push=true
           cache-to: type=gha,mode=max
           cache-from: type=gha
+          no-cache-filters:
           tags: ${{ steps.image-meta.outputs.tags }}
           labels: ${{ steps.image-meta.outputs.labels }}
