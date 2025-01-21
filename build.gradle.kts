@@ -21,7 +21,6 @@ repositories {
 }
 
 nebulaRelease {
-
 }
 
 dependencies {
@@ -37,6 +36,7 @@ dependencies {
     implementation("io.micronaut.toml:micronaut-toml")
     implementation(libs.kotlin.reflect)
     implementation(libs.kotlin.jdk8)
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
     implementation(libs.image.metadata)
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")

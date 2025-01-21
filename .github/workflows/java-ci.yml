@@ -50,7 +50,6 @@ jobs:
           file: build/docker/native-main/DockerfileNative
           push: true
           platforms: linux/amd64,linux/arm64
-          sbom: true
           outputs: type=registry,push=true
           cache-to: type=gha,mode=max
           cache-from: type=gha
