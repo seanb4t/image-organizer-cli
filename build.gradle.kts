@@ -44,6 +44,9 @@ dependencies {
 }
 
 rewrite {
+    activeRecipe(
+        "org.openrewrite.java.AddApache2LicenseHeader"
+    )
     plainTextMask("**/*.txt")
 }
 
