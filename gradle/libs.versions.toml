@@ -1,6 +1,6 @@
 [versions]
 micronaut="4.7.4"
-micronaut-gradle="4.5.0"
+micronaut-gradle="4.5.1"
 kotlin="2.1.20"
 
 [libraries]
