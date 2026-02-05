@@ -1,7 +1,7 @@
 [versions]
 micronaut="4.7.4"
 micronaut-gradle="4.6.2"
-kotlin="2.2.21"
+kotlin="2.3.10"
 
 [libraries]
 kotlin-reflect = {module="org.jetbrains.kotlin:kotlin-reflect", version.ref="kotlin"}
